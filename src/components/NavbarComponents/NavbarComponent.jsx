@@ -1,40 +1,53 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import CardWidgetComponent from '../CardWidgetComponent/CardWidgetComponent';
-import logo from '../../assets/logoo.jpg'
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import CartWidgetComponent from "../CartWidgetComponent/CartWidgetComponent";
+
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const NavBarComponent = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/products/categories")
+      .then((res) => setCategories(res.data))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
-    <Navbar expand="lg" className="fondo">
+    <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">
-            <img 
-                src={logo} 
-                width="200"
-                height="50"
-                className="d-inline-block align-top"
-                alt="Logo navbar" 
-                />
-            </Navbar.Brand>
+        <Navbar.Brand>
+          <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+            Tienda Daniel
+          </Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="color-font">Home</Nav.Link>
-            <Nav.Link href="#link" className="color-font">Productos</Nav.Link>
-            <NavDropdown title="Categorias" id="basic-nav-dropdown" className='custom-nav-dropdown'>
-              <NavDropdown.Item href="#action/3.1">PC/Notebook</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Periféricos
-              </NavDropdown.Item>
+            <NavDropdown title="Categorías" id="basic-nav-dropdown">
+              {categories.map((category, index) => {
+                return (
+                  <NavDropdown.Item key={index}>
+                    <Link
+                      to={`/category/${category}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      {category}
+                    </Link>
+                  </NavDropdown.Item>
+                );
+              })}
             </NavDropdown>
           </Nav>
-          <CardWidgetComponent />
+          <CartWidgetComponent />
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-}
+};
 
 export default NavBarComponent;

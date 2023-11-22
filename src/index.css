@@ -1,19 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    font-family: monospace;
-    color: white;
-    font-size: 20px;
-    background-color: #65727c
-
-
-    ;
-}
-.fondo{
-    background-color: #55ABDE;
+body {
+    background-color: darkslategray;
 }
 
 

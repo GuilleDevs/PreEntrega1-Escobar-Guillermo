@@ -1,13 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBarComponent from './components/NavbarComponents/NavbarComponent';
-import './index.css'
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import MainRoutes from "./routes/MainRouter";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+
 function App() {
-  
-  return <div>
-    <NavBarComponent />
-    <ItemListContainer greeting="Bienvenido a mi e-commerce"/>
-  </div>
+  return (
+    <div>
+      <MainRoutes />
+    </div>
+  );
 }
 
-export default App
+export default App;
